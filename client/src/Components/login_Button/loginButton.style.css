@@ -1,0 +1,81 @@
+.loginBut {
+    display: inline-block;
+    border-radius: 7px;
+    border: none;
+    background: #1875FF;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    font-size: 15px;
+    /* box-shadow: 0px 1px 12px -11px #1875FF; */
+    width: 8em;
+    padding: 0.5em 1em;
+    transition: all 0.4s;
+    cursor: pointer;
+   }
+   
+   .loginBut span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+   }
+   
+   .loginBut span:after {
+    content: '/ Signin';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.7s;
+   }
+   
+   .loginBut:hover span {
+    padding-right: 3.55em;
+   }
+   
+   .loginBut:hover span:after {
+    opacity: 4;
+    right: 0;
+   }
+
+
+   .SignupButn {
+    background: #265bc2;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    margin-left: 1rem;
+    font-weight: 600;
+    color: #fff;
+    border: 1px solid #4c83ee;
+}
+
+.SignupButn:hover{
+    filter: drop-shadow(2px 4px 6px #4c83ee);
+}
+
+.LoginButn {
+    background: #265bc2;
+    padding: 0.4rem 1rem;
+    border-radius: 0.4rem;
+    margin-left: 1rem;
+    font-weight: 600;
+  
+    color: #fff;
+    border: 1px solid #4c83ee;
+}
+
+.LoginButn:hover{
+    filter: drop-shadow(2px 4px 6px #4c83ee);
+}
+
+.LogoutBtn {
+    background: #265bc2;
+    padding: 0.4rem 1rem;
+    border-radius: 0.4rem;
+    margin-left: 1rem;
+    font-weight: 600;
+  
+    color: #fff;
+    border: 1px solid #4c83ee;
+}
