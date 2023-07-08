@@ -13,10 +13,11 @@ const [loginBut,setLoginBut]=useState(false)
 
 
 const handleLogout=()=>{
-  const API = "http://localhost:4040/user/logout"
+  const API = "https://blog-server-oxr9.onrender.com/user/logout"
+  // const API = "http://localhost:4040"
   axios.post(API)
   .then(res=>{
-    console.log("logout",res.data);
+    // console.log("logout",res.data);
     Navi('/')
     setLoginBut(false)
     localStorage.clear()
@@ -27,7 +28,7 @@ const handleLogout=()=>{
 
 useEffect(()=>{
   if( localStorage.getItem("token")){
-    console.log( localStorage.getItem("token"));
+    // console.log( localStorage.getItem("token"));
     setLoginBut(true)
   }
  
@@ -36,7 +37,7 @@ useEffect(()=>{
 const handleLogin=()=>{
     Navi('/login')
 }
-console.log(loginBut);
+// console.log(loginBut);
 
 const handleSignup=()=>{
     Navi('/signup')
@@ -45,6 +46,7 @@ const handleSignup=()=>{
 
 
   return (
+    <>
     <div className='btnContainer'>
       
   {(!loginBut) && <button className="LoginButn btnClr" onClick={handleLogin} ><span>Log In</span></button>   }   
@@ -52,7 +54,11 @@ const handleSignup=()=>{
 
 {(loginBut) && <button className="LogoutBtn" onClick={handleLogout} ><span>Log out</span></button>   }   
 
+{(loginBut) &&<p className='userName'><span>Hi {localStorage.getItem("name")}</span></p>}
+
+
     </div>
+    </>
   )
 }
 

@@ -2,45 +2,75 @@ import React, { useState, useEffect } from "react";
 import "./login.style.css";
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+import { LoginApi } from "../../constants/ApiList";
 
 function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [formdata, setFormdata] = useState({
-    email: "",
-    password: "",
-  });
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  // const [formdata, setFormdata] = useState({
+  //   email: "",
+  //   password: "",
+  // });
   const [store, setStore] = useState(null);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormdata((prevformdata) => ({
-      ...prevformdata,
-      [name]: value,
-    }));
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormdata((prevformdata) => ({
+  //     ...prevformdata,
+  //     [name]: value,
+  //   }));
     // console.log(formdata);
-  };
+  // };
+
+  const handleEmail=(event)=>{
+    setEmail(event.target.value)
+  }
+
+  const handlePassword=(event)=>{
+    setPassword(event.target.value)
+  }
 
   const handleButton = (e) => {
     e.preventDefault();
-    const { email, password } = formdata;
-    const API = "https://blog-server-oxr9.onrender.com/user/login";
+ 
+    // const API = "https://blog-server-oxr9.onrender.com/user/login";
+    // const API = "http://localhost:4040/user/login"
+    // console.log(email,password);
+    const API = LoginApi
 
     if (email && password) {
+      console.log("if condition");
       axios
-        .post(API, formdata)
+        .post(API,{email,password})
         .then((res) => {
           //     // alert("User registered");
-          setStore(res.data);
+          // console.log(res);
+          if(res.data.email){
           // console.log(res.data);
-          localStorage.setItem("token", res.data.token);
-          navigate("/");
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("name",res.data.name)
+            navigate("/");
+            setStore(res.data);
+            // setEmail()
+            // setPassword("")
+            // console.log(res.data);
+          }else{
+            setError("Invalid password/email");
+            setEmail("")
+            setPassword("")
+          }         
         })
         .catch((err) => console.log(err));
     } else {
       setError("Please enter email and password.");
     }
   };
+
+  useEffect(()=>{
+  // console.log(store);
+  },[store])
 
   const handleBackBtn = () => {
     navigate("/");
@@ -66,8 +96,9 @@ function Login() {
                 className="lLoginInp"
                 type="email"
                 name="email"
-                id="email"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={handleEmail}
+                value={email}
                 placeholder="Enter your email"
                 required
               />
@@ -79,8 +110,9 @@ function Login() {
                 className="lLoginInp"
                 type="password"
                 name="password"
-                id="password"
-                onChange={handleChange}
+                value={password}
+                // onChange={handleChange}
+                onChange={handlePassword}
                 placeholder="Enter your password"
                 required
               />

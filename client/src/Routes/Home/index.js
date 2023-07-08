@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Logo, TopNavigation , LogoMobile, Footer, Login, LoginButton} from "../../Components";
 import Banner from "./Banner";
 import Latest from "./Latest";
@@ -6,10 +6,12 @@ import LatestArticle from "./LatestArticle";
 import Store from "../../Utility/ContextStore/contextAPI";
 import "../../App.css";
 import TopPots from "./TopPsts";
+import axios from "axios";
 
 const Home = () => {
   //  const [state] = useContext(AppData)
   // console.log(state);
+
 
   return (
     <>
@@ -18,6 +20,7 @@ const Home = () => {
     <div className='LLocal' ><Logo/>
     <div className="LoginPos"><LoginButton/></div>
       <TopNavigation/></div>
+   
       {/* <Store> */}
         <Banner />
         <Latest />

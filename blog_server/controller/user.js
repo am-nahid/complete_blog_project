@@ -40,6 +40,7 @@ const token = jwt.sign({user:email},secretKey,{expiresIn:3600})
       )
     }
     storedData.push(tempObj)
+   //  console.log("signin stored data",storedData);
 
     res.status(200).cookie("tokenName",token,options).send(tempObj)
   
@@ -50,17 +51,59 @@ const token = jwt.sign({user:email},secretKey,{expiresIn:3600})
 
 const login =(req,res)=>{
    const data = req.body
-   const user = storedData.find((item)=>item.email===data.email)
+   // console.log("login storedData",storedData);
+   // console.log("login data",data);
+   // console.log("reg.body",req.body)
+   const {email, password}=data;
+   // for(var i=0;i<=storedData.length;i++){
+   //    const userEmail = storedData[i].email
+   //    if(userEmail=== email){
+   //       res.send({
+   //          msg: "user already exist"
+   //       })
+   //    }else{
+   //       console.log("logging in");
+   //       const validate = bcrypt.compareSync(data.password,user.password)
+   //    const token = jwt.sign({user:user.email},secretKey,{expiresIn:3600})
+   //    if(validate){
+   //       const userInfo = {
+   //          _id:user._id,
+   //          email:user.email,
+   //          password:user.password ,
+   //          token:token
+   //       }
+   //       console.log("userInfo in login",userInfo);
+   //       const options = {
+   //          expires: new Date(
+   //             Date.now()+5*24*60*60
+   //          )
+   //        }
+   //       res.status(200).cookie("tokenName",token,options).send(userInfo)
+   //    } else{
+   //       res.send("Invalid Password")
+   //    }
+
+   //    }
+   // }
+
+   const user = storedData.find((item)=>{
+      // console.log("inside user",item.email,email);
+      item.email===email
+   return item
+   })
+   // console.log("user login",user);
    if(user){
       const validate = bcrypt.compareSync(data.password,user.password)
       const token = jwt.sign({user:user.email},secretKey,{expiresIn:3600})
       if(validate){
          const userInfo = {
-            _id:user.id,
+            _id:user._id,
+            name:user.name,
             email:user.email,
             password:user.password ,
             token:token
          }
+         // console.log("userInfo in login",userInfo);
          const options = {
             expires: new Date(
                Date.now()+5*24*60*60
@@ -70,7 +113,8 @@ const login =(req,res)=>{
       } else{
          res.send("Invalid Password")
       }
-   }else{
+   }
+   else{
       res.send("user has not registered")
    }
 
@@ -78,10 +122,13 @@ const login =(req,res)=>{
 
 const logout =(req,res)=>{
  
-   res.clearCookie("tokenName")
-    res.status(200).json({
-      msg:"user logged out"
-    })
+   res.cookie("tokenName",{
+      expires:new Date(Date.now())
+  })
+  res.status(200).json({
+      msg:"user LogedOut"
+  })
+
 }
 
 const auth = (req,res)=>{

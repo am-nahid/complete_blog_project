@@ -3,6 +3,14 @@
   margin: 0;
 }
 
+.loadCont {
+  height: 100vh;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
 .center{
   text-align: center;
   padding-top: 2rem;
@@ -486,6 +494,18 @@ h4:hover{
 
 }
 
+.welcomeMsg{
+  position: absolute;
+  top: 7rem;
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  color: #d33115;
+  font-weight: 600;
+  font-size: larger;
+}
+
 
 @media  (min-width:600px) and (max-width:1000px){
 
@@ -607,8 +627,11 @@ h4:hover{
     }
 
 .LogoutBtn {
-  position: absolute;
+  /* position: absolute;
   top: -11px;
+  right: 10px; */
+  position: absolute;
+  top: 0px;
   right: 10px;
 }
     

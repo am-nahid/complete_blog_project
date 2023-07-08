@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./signup.style.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SignupApi } from "../../constants/ApiList";
 
 function Signup() {
   const navigate = useNavigate();
   const [formdata, setFormData] = useState({
     name: "",
-    phonenumber: "",
+    phone: "",
     email: "",
     password: "",
   });
@@ -19,22 +20,32 @@ function Signup() {
     e.preventDefault();
     // console.log(formdata);
     // setStore({...formdata})
-    const { name, phonenumber, email, password } = formdata;
-    const API = "https://blog-server-oxr9.onrender.com/user/signup";
+    const { name, phone, email, password } = formdata;
+    // const API = "http://localhost:4040/user/signup"
+    // const API = "https://blog-server-oxr9.onrender.com/user/signup";
+    const API = SignupApi
     setFormData({
       name: "",
-      phonenumber: "",
+      phone: "",
       email: "",
       password: "",
     });
-    if (name && phonenumber && email && password) {
+    if (name && phone && email && password) {
       axios
         .post(API, formdata)
         .then((res) => {
-          console.log(res.data.token);
-          localStorage.setItem("token",res.data.token)
+          // console.log("signup", res.data);
+          // console.log(res.data.name);
+          
+          if(res.data._id){
+            localStorage.setItem("token",res.data.token)
+            localStorage.setItem("name",res.data.name)
+            navigate("/");
+          }else {
+            setErr("One or more required fields is missing or invalid");
+          }
      
-          navigate("/");
+         
         })
         .catch((err) => console.log(err));
     } else {
@@ -76,8 +87,8 @@ function Signup() {
           <input
             className="sInp"
             type="number"
-            name="phonenumber"
-            value={formdata.phonenumber}
+            name="phone"
+            value={formdata.phone}
             placeholder="Enter Your Phone Number"
             onChange={handleChange}
             required

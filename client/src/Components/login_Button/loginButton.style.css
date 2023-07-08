@@ -79,3 +79,18 @@
     color: #fff;
     border: 1px solid #4c83ee;
 }
+
+.userName {
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.userName span{
+    color: #4b8ce8;
+    letter-spacing: 0.3px;
+    font-weight: 700;
+    font-size: 17px;
+}

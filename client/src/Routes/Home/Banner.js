@@ -14,7 +14,9 @@ function Banner(props) {
     const API = "https://blog-server-oxr9.onrender.com";
     axios
       .get(API, data)
-      .then((res) => setData(res.data[0]))
+      .then((res) => {setData(res.data[0])
+      // console.log(res.data);
+  })
       .catch((err) => console.log(err));
   }, []);
 
