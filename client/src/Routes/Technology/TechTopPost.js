@@ -4,6 +4,7 @@ import '../../App.css'
 import { AppData } from "../../Utility";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { AllData } from "../../constants/ApiList";
 
 
 
@@ -13,7 +14,8 @@ function TechTopPost() {
 
   // const [data]= useContext(AppData)
 useEffect(()=>{
-  const API="http://localhost:4040"
+  // const API="http://localhost:4040"
+  const API =AllData
 axios.get(API,data)
 .then(res=>setData(res.data[0]))
 .catch(err=>console.log(err))

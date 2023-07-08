@@ -7,13 +7,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./home.style.css";
 import "../../App.css";
 import axios from "axios";
+import { AllData } from "../../constants/ApiList";
 
 const LatestArticle = () => {
   const [data,setData]=useState([])
 
   // const [data]= useContext(AppData)
 useEffect(()=>{
-  const API="https://blog-server-oxr9.onrender.com"
+  // const API="https://blog-server-oxr9.onrender.com"
+  const API =AllData
 axios.get(API,data)
 .then(res=>setData(res.data[0]))
 .catch(err=>console.log(err))

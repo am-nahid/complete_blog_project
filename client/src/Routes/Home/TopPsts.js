@@ -7,13 +7,15 @@ import { AppData } from '../../Utility'
 import { DateExt } from "../../Components";
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { AllData } from '../../constants/ApiList';
 
 function TopPots() {
   const [data,setData]=useState([])
 
   // const [data]= useContext(AppData)
 useEffect(()=>{
-  const API="https://blog-server-oxr9.onrender.com"
+  // const API="https://blog-server-oxr9.onrender.com"
+  const API =AllData
 axios.get(API,data)
 .then(res=>setData(res.data[0]))
 .catch(err=>console.log(err))
